@@ -17,6 +17,11 @@ v0.1 - get vnets, get vnet peerings, create map, using gojs demo library, type: 
 - 'go.js' (suplementary 3rd party software, no rights I hold please refer to vendor for newer version here: https://github.com/NorthwoodsSoftware/GoJS)
 - 'netmap-xxxx.html' (file generated for viewing your network map, where xxxx is tenant last 4 letters)
 
+## Use case
+- Network troubleshooting
+- Real network overview
+- Ops dashboard (need slight modification for better views)
+
 ## Output Example
 - netmap-demo.html
 <img src="https://user-images.githubusercontent.com/74017803/111834820-d022a680-88fc-11eb-8646-9aeea2995bf7.png" alt="drawing" width="800"/>
