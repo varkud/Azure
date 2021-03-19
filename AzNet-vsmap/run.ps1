@@ -17,7 +17,7 @@ Param
     (
     [Parameter(Mandatory=$true)]  [String]$tenant        #tenant ID is required
     )
-
+ 
 #clear content of map
 Write-Output "" > netmap1.5.html
 Write-Output "" > netmap2.5.html
