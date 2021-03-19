@@ -1,0 +1,79 @@
+<!DOCTYPE html> 
+  <html>
+    <head>
+	<script src="go.js"></script>
+	<script id="code">
+		function init() {
+		  var $ = go.GraphObject.make;  
+	  
+		  var myDiagram =
+			$(go.Diagram, "myDiagramDiv",  
+			  { 
+				
+				"undoManager.isEnabled": true
+			  });
+	  
+		  // define Diagram template
+		  myDiagram.nodeTemplate =
+			$(go.Node, "Auto",
+			  $(go.Shape, "RoundedRectangle", { stroke: "white", strokeWidth: 5, fill: "lightblue" }),
+			  //$(go.RowColumnDefinition, { row: 2, separatorStrokeWidth: 1.5, separatorStroke: "black" }),
+			  $(go.Panel, "Table",
+				{ margin: 8 },
+				$(go.RowColumnDefinition, { row: 1, separatorStrokeWidth: 1, separatorStroke: "gray" }),
+				$(go.RowColumnDefinition, { row: 2, separatorStrokeWidth: 1, separatorStroke: "gray" }),
+				$(go.RowColumnDefinition, { row: 3, separatorStrokeWidth: 1, separatorStroke: "gray" }),
+				$(go.TextBlock, "vNet: ", { row: 0, alignment: go.Spot.Left, column: 0, margin: 5 }),
+				$(go.TextBlock, "vNet Space: ", { row: 2, alignment: go.Spot.Left, column: 0, margin: 5 }),
+				$(go.TextBlock, "Subnets: ", { row: 3, alignment: go.Spot.Left, column: 0, margin: 5 }),
+				$(go.TextBlock, {row: 0, column: 1, alignment: go.Spot.Left, margin: 5, maxSize: new go.Size(160, NaN)}, new go.Binding("text", "name")),
+				$(go.TextBlock, {row: 1, column: 0, columnSpan: 2, alignment: go.Spot.Left, margin: 5, maxSize: new go.Size(160, NaN)}, new go.Binding("text", "info")),
+				$(go.TextBlock, {row: 2, column: 1, alignment: go.Spot.Left, margin: 5, maxSize: new go.Size(160, NaN)}, new go.Binding("text", "Address")),
+				$(go.TextBlock, {row: 4, column: 0, columnSpan: 2, alignment: go.Spot.Left, margin: 5, maxSize: new go.Size(160, NaN)}, new go.Binding("text", "Subnets"))
+              )
+			);
+			myDiagram.groupTemplate =
+			$(go.Group, "Vertical",
+				$(go.Panel, "Auto",
+					$(go.Shape, "RoundedRectangle", { parameter1: 14, fill: "white",stroke: "white", strokeWidth: 0, }),
+					$(go.Placeholder, { padding: 10 })
+				),
+			);
+			myDiagram.linkTemplate=
+        	$(go.Link,  // the whole link panel
+				$(go.Shape,  // the link shape
+					{ isPanelMain: true,
+					stroke: "black",
+					strokeWidth: 1,
+					margin: -10
+				}),
+		 	);
+		  // define Diagram data
+		  myDiagram.model = new go.GraphLinksModel(
+		  [
+
+{ key: "vnetid1", isGroup: true }, { key: "/subscriptions/Sid-Sid-Sid-Sid-Sid1/resourceGroups/rg-net-shared/providers/Microsoft.Network/virtualNetworks/vnet-demo-shared-001", group: "vnetid1", name: "vnet-demo-shared-001", Address : "10.0.0.0/23", Subnets : "AzureFirewallSubnet 10.0.0.128/26\nGatewaySubnet 10.0.0.64/27\nAzureBastionSubnet 10.0.0.0/27\nsnet-agw-shared-001 10.0.0.96/27\nsnet-dmz-shared-001 10.0.1.0/25\nsnet-app-shared-001 10.0.1.128/25\nsnet-management-shared-001 10.0.0.192/26\nsnet-adds-shared-001 10.0.0.32/27", info: "demo-shared\nrg-net-shared"}, 
+{ key: "vnetid2", isGroup: true }, { key: "/subscriptions/Sid-Sid-Sid-Sid-Sid2/resourceGroups/rg-net-prod/providers/Microsoft.Network/virtualNetworks/vnet-demo-prod-001", group: "vnetid2", name: "vnet-demo-prod-001", Address : "10.0.16.0/21", Subnets : "AzureBastionSubnet 10.0.16.0/27\nsnet-app-prod-001 10.0.18.0/23", info: "demo-production\nrg-net-prod"}, 
+{ key: "vnetid3", isGroup: true }, { key: "/subscriptions/Sid-Sid-Sid-Sid-Sid3/resourceGroups/rg-net-test/providers/Microsoft.Network/virtualNetworks/vnet-demo-test-001", group: "vnetid3", name: "vnet-demo-test-001", Address : "10.0.8.0/23", Subnets : "AzureBastionSubnet 10.0.8.0/27\nsnet-app-test-001 10.0.8.128/25", info: "demo-test\nrg-net-test"}, 
+{ key: "vnetid4", isGroup: true }, { key: "/subscriptions/Sid-Sid-Sid-Sid-Sid4/resourceGroups/rg-net-acc/providers/Microsoft.Network/virtualNetworks/vnet-demo-acc-001", group: "vnetid4", name: "vnet-demo-acc-001", Address : "10.0.12.0/23", Subnets : "AzureBastionSubnet 10.0.12.0/27\nsnet-app-acc-001 10.0.12.128/25", info: "demo-acceptance\nrg-net-acc"}, 
+{ key: "vnetid5", isGroup: true }, { key: "/subscriptions/Sid-Sid-Sid-Sid-Sid5/resourceGroups/rg-net-dev/providers/Microsoft.Network/virtualNetworks/vnet-demo-dev-001", group: "vnetid5", name: "vnet-demo-dev-001", Address : "10.0.4.0/23", Subnets : "AzureBastionSubnet 10.0.4.0/27\nsnet-app-dev-001 10.0.4.128/25", info: "demo-development\nrg-net-dev"}, 
+],
+[
+
+{ from: "/subscriptions/Sid-Sid-Sid-Sid-Sid1/resourceGroups/rg-net-shared/providers/Microsoft.Network/virtualNetworks/vnet-demo-shared-001", to: "/subscriptions/Sid-Sid-Sid-Sid-Sid3/resourceGroups/rg-net-test/providers/Microsoft.Network/virtualNetworks/vnet-demo-test-001" },
+{ from: "/subscriptions/Sid-Sid-Sid-Sid-Sid1/resourceGroups/rg-net-shared/providers/Microsoft.Network/virtualNetworks/vnet-demo-shared-001", to: "/subscriptions/Sid-Sid-Sid-Sid-Sid2/resourceGroups/rg-net-prod/providers/Microsoft.Network/virtualNetworks/vnet-demo-prod-001" },
+{ from: "/subscriptions/Sid-Sid-Sid-Sid-Sid1/resourceGroups/rg-net-shared/providers/Microsoft.Network/virtualNetworks/vnet-demo-shared-001", to: "/subscriptions/Sid-Sid-Sid-Sid-Sid4/resourceGroups/rg-net-acc/providers/Microsoft.Network/virtualNetworks/vnet-demo-acc-001" },
+{ from: "/subscriptions/Sid-Sid-Sid-Sid-Sid1/resourceGroups/rg-net-shared/providers/Microsoft.Network/virtualNetworks/vnet-demo-shared-001", to: "/subscriptions/Sid-Sid-Sid-Sid-Sid5/resourceGroups/rg-net-dev/providers/Microsoft.Network/virtualNetworks/vnet-demo-dev-001" },
+{ from: "/subscriptions/Sid-Sid-Sid-Sid-Sid2/resourceGroups/rg-net-prod/providers/Microsoft.Network/virtualNetworks/vnet-demo-prod-001", to: "/subscriptions/Sid-Sid-Sid-Sid-Sid1/resourceGroups/rg-net-shared/providers/Microsoft.Network/virtualNetworks/vnet-demo-shared-001" },
+{ from: "/subscriptions/Sid-Sid-Sid-Sid-Sid3/resourceGroups/rg-net-test/providers/Microsoft.Network/virtualNetworks/vnet-demo-test-001", to: "/subscriptions/Sid-Sid-Sid-Sid-Sid1/resourceGroups/rg-net-shared/providers/Microsoft.Network/virtualNetworks/vnet-demo-shared-001" },
+{ from: "/subscriptions/Sid-Sid-Sid-Sid-Sid4/resourceGroups/rg-net-acc/providers/Microsoft.Network/virtualNetworks/vnet-demo-acc-001", to: "/subscriptions/Sid-Sid-Sid-Sid-Sid1/resourceGroups/rg-net-shared/providers/Microsoft.Network/virtualNetworks/vnet-demo-shared-001" },
+{ from: "/subscriptions/Sid-Sid-Sid-Sid-Sid5/resourceGroups/rg-net-dev/providers/Microsoft.Network/virtualNetworks/vnet-demo-dev-001", to: "/subscriptions/Sid-Sid-Sid-Sid-Sid1/resourceGroups/rg-net-shared/providers/Microsoft.Network/virtualNetworks/vnet-demo-shared-001" },
+]);
+}
+</script>
+</head>
+<body  onload="init()"></body>
+<div id="myDiagramDiv" style="border: solid 1px; min-width:800px; min-height:800px">
+</div>
+</body>
+</html>
