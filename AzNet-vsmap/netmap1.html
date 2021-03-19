@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html> 
+  <html>
+    <head>
+	<script src="go.js"></script>
+	<script id="code">
+		function init() {
+		  var $ = go.GraphObject.make;  
+	  
+		  var myDiagram =
+			$(go.Diagram, "myDiagramDiv",  
+			  { 
+				
+				"undoManager.isEnabled": true
+			  });
+	  
+		  // define Diagram template
+		  myDiagram.nodeTemplate =
+			$(go.Node, "Auto",
+			  $(go.Shape, "RoundedRectangle", { stroke: "white", strokeWidth: 5, fill: "lightblue" }),
+			  //$(go.RowColumnDefinition, { row: 2, separatorStrokeWidth: 1.5, separatorStroke: "black" }),
+			  $(go.Panel, "Table",
+				{ margin: 8 },
+				$(go.RowColumnDefinition, { row: 1, separatorStrokeWidth: 1, separatorStroke: "gray" }),
+				$(go.RowColumnDefinition, { row: 2, separatorStrokeWidth: 1, separatorStroke: "gray" }),
+				$(go.RowColumnDefinition, { row: 3, separatorStrokeWidth: 1, separatorStroke: "gray" }),
+				$(go.TextBlock, "vNet: ", { row: 0, alignment: go.Spot.Left, column: 0, margin: 5 }),
+				$(go.TextBlock, "vNet Space: ", { row: 2, alignment: go.Spot.Left, column: 0, margin: 5 }),
+				$(go.TextBlock, "Subnets: ", { row: 3, alignment: go.Spot.Left, column: 0, margin: 5 }),
+				$(go.TextBlock, {row: 0, column: 1, alignment: go.Spot.Left, margin: 5, maxSize: new go.Size(160, NaN)}, new go.Binding("text", "name")),
+				$(go.TextBlock, {row: 1, column: 0, columnSpan: 2, alignment: go.Spot.Left, margin: 5, maxSize: new go.Size(160, NaN)}, new go.Binding("text", "info")),
+				$(go.TextBlock, {row: 2, column: 1, alignment: go.Spot.Left, margin: 5, maxSize: new go.Size(160, NaN)}, new go.Binding("text", "Address")),
+				$(go.TextBlock, {row: 4, column: 0, columnSpan: 2, alignment: go.Spot.Left, margin: 5, maxSize: new go.Size(160, NaN)}, new go.Binding("text", "Subnets"))
+              )
+			);
+			myDiagram.groupTemplate =
+			$(go.Group, "Vertical",
+				$(go.Panel, "Auto",
+					$(go.Shape, "RoundedRectangle", { parameter1: 14, fill: "white",stroke: "white", strokeWidth: 0, }),
+					$(go.Placeholder, { padding: 10 })
+				),
+			);
+			myDiagram.linkTemplate=
+        	$(go.Link,  // the whole link panel
+				$(go.Shape,  // the link shape
+					{ isPanelMain: true,
+					stroke: "black",
+					strokeWidth: 1,
+					margin: -10
+				}),
+		 	);
+		  // define Diagram data
+		  myDiagram.model = new go.GraphLinksModel(
+		  [
