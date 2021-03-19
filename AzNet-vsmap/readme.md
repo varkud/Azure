@@ -17,3 +17,5 @@ v0.1 - get vnets, get vnet peerings, create map, using gojs demo library, type: 
 - 'netmap-xxxx.html' (file generated for viewing your network map, where xxxx is tenant last 4 letters)
 
 ## Output Example
+- netmap-demo.html
+<img src="https://user-images.githubusercontent.com/74017803/111834820-d022a680-88fc-11eb-8646-9aeea2995bf7.png" alt="drawing" width="800"/>
