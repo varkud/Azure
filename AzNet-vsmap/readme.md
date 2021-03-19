@@ -6,7 +6,7 @@ v0.1 - get vnets, get vnet peerings, create map, using gojs demo library, type: 
 
 ## Requirements to run
 - Powershell 5+
-- Logged in to corect tenant
+- Logged in to correct tenant
 
 ## List of files for execution
 - 'run.ps1' script will execute scanning of provided tenant via command line like: ./run.ps1 -tenant 'xx-xx-xx-xx'
