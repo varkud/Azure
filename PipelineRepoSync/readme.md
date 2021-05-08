@@ -32,4 +32,6 @@ Create Folder/file for cache/sync/files keep - 'temp'<br>
 Create repo named 'KeeperShow'
 
 
-### AP
+### Azure DevOps Pipelines
+Go to Mid project, select pipelines and press create, select clasic, next, select pipecode repo, next, select empty.
+
