@@ -20,7 +20,7 @@ Create Folder\file named 'SyncedFolder\SyncedFolder.md'
 Put some symbols...
 
 #### Project - Mid
-Create repo named 'code'
+Create repo named 'codesync'
 Create Folder/file for pipeline code keep - 'pipecode'
 Create Folder/file for cache/sync/files keep - 'temp'
 
